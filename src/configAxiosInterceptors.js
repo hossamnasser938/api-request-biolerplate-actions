@@ -1,16 +1,5 @@
 import axios from "axios";
-
-const mapRequestUrlToConfigObject = (requestUrl, BaseActionsConfigurations) => {
-  const configObject = BaseActionsConfigurations.find(
-    config => config.requestUrl === requestUrl
-  );
-
-  if (configObject) {
-    return configObject;
-  } else {
-    throw new Error("strange request url: " + requestUrl);
-  }
-};
+import mapRequestUrlToConfigObject from './mapRequestUrlToConfigObject';
 
 export const configAxiosInterceptors = (
   dispatch,
