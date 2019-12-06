@@ -1,4 +1,4 @@
-import getDerivedActionTypes from './getDerivedActionTypes';
+import getDerivedActionTypes from "./getDerivedActionTypes";
 
 export const defaultHighOrderReducer = (
   initialState,

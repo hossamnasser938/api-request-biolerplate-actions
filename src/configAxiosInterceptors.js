@@ -1,5 +1,5 @@
 import axios from "axios";
-import mapRequestUrlToConfigObject from './mapRequestUrlToConfigObject';
+import mapRequestUrlToConfigObject from "./mapRequestUrlToConfigObject";
 
 export const configAxiosInterceptors = (
   dispatch,
