@@ -6,7 +6,7 @@ export default baseActionTypes => {
       "ERROR_" + cBaseActionType
     ];
 
-    return acc.concat(cDefaultActionTypes);
+    return acc.concat(cBaseActionType? cDefaultActionTypes: []);
   }, []);
 
   return derivedActionTypes;
