@@ -11,14 +11,28 @@ test("test mapRequestUrlToConfigObject", () => {
     baseActionType: "ACTION_2"
   };
 
-  const BaseActionsConfigurations = [action1Config, action2Config];
+  const action3Config = {
+    requestUrl: "url3",
+    baseActionType: "ACTION_3"
+  };
+
+  const BaseActionsConfigurations = [
+    action1Config,
+    action2Config,
+    action3Config
+  ];
 
   expect(mapRequestUrlToConfigObject("url1", BaseActionsConfigurations)).toBe(
     action1Config
   );
+
   expect(mapRequestUrlToConfigObject("url2", BaseActionsConfigurations)).toBe(
     action2Config
   );
+
+  expect(
+    mapRequestUrlToConfigObject("url3?param=value", BaseActionsConfigurations)
+  ).toBe(action3Config);
 
   expect(() =>
     mapRequestUrlToConfigObject("action3", BaseActionsConfigurations)
