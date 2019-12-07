@@ -1,83 +1,39 @@
 import axios from "axios";
-import mapRequestUrlToConfigObject from "./mapRequestUrlToConfigObject";
+import {
+  highOrderRequestOnFullfilledInterceptor,
+  highOrderRequestOnRejectedInterceptor,
+  highOrderResponseOnFullfilledInterceptor,
+  highOrderResponseOnRejectedInterceptor
+} from "./highOrderInterceptors";
 
 export const configAxiosInterceptors = (
   dispatch,
   BASE_URL,
   BaseActionsConfigurations
 ) => {
-  const requestOnFullfilledInterceptor = config => {
-    const requestUrlConfigObject = mapRequestUrlToConfigObject(
-      config.url,
-      BaseActionsConfigurations
-    );
-
-    if (!requestUrlConfigObject.noStart) {
-      dispatch({
-        type: "START_" + requestUrlConfigObject.baseActionType
-      });
-    }
-
-    return config;
-  };
-
-  const requestOnRejectedInterceptor = error => {
-    alert("requestOnRejectedInterceptor");
-
-    return Promise.reject(error);
-  };
-
-  const responseOnFullfilledInterceptor = response => {
-    const requestUrlConfigObject = mapRequestUrlToConfigObject(
-      response.config.url.split(BASE_URL)[1],
-      BaseActionsConfigurations
-    );
-
-    if (!requestUrlConfigObject.noStop) {
-      dispatch({
-        type: "STOP_" + requestUrlConfigObject.baseActionType
-      });
-    }
-
-    if (!requestUrlConfigObject.noSuccess) {
-      dispatch({
-        type: "SUCCESS_" + requestUrlConfigObject.baseActionType,
-        payload: response
-      });
-    }
-
-    return response;
-  };
-
-  const responseOnRejectedInterceptor = error => {
-    const requestUrlConfigObject = mapRequestUrlToConfigObject(
-      error.config.url.split(BASE_URL)[1],
-      BaseActionsConfigurations
-    );
-
-    if (!requestUrlConfigObject.noStop) {
-      dispatch({
-        type: "STOP_" + requestUrlConfigObject.baseActionType
-      });
-    }
-
-    if (!requestUrlConfigObject.noError) {
-      dispatch({
-        type: "ERROR_" + requestUrlConfigObject.baseActionType,
-        payload: { message: requestUrlConfigObject.errorMessage }
-      });
-    } else {
-      return Promise.reject(error);
-    }
-  };
-
   axios.interceptors.request.use(
-    requestOnFullfilledInterceptor,
-    requestOnRejectedInterceptor
+    highOrderRequestOnFullfilledInterceptor(
+      dispatch,
+      BASE_URL,
+      BaseActionsConfigurations
+    ),
+    highOrderRequestOnRejectedInterceptor(
+      dispatch,
+      BASE_URL,
+      BaseActionsConfigurations
+    )
   );
 
   axios.interceptors.response.use(
-    responseOnFullfilledInterceptor,
-    responseOnRejectedInterceptor
+    highOrderResponseOnFullfilledInterceptor(
+      dispatch,
+      BASE_URL,
+      BaseActionsConfigurations
+    ),
+    highOrderResponseOnRejectedInterceptor(
+      dispatch,
+      BASE_URL,
+      BaseActionsConfigurations
+    )
   );
 };
