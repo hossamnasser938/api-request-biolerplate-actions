@@ -1,2 +1,2 @@
-export * from "./src/configAxiosInterceptors";
-export * from "./src/defaultHighOrderReducer";
+export * from "./src/package/configAxiosInterceptors";
+export * from "./src/package/defaultHighOrderReducer";

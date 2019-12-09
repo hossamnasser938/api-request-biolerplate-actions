@@ -1,4 +1,4 @@
-import { defaultHighOrderReducer } from "../defaultHighOrderReducer";
+import { defaultHighOrderReducer } from "../package/defaultHighOrderReducer";
 
 test("test defaultHighOrderReducer", () => {
   // ___ test ordinary reducer ___ //

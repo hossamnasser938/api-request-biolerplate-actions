@@ -3,7 +3,7 @@ import {
   highOrderRequestOnRejectedInterceptor,
   highOrderResponseOnFullfilledInterceptor,
   highOrderResponseOnRejectedInterceptor
-} from "../highOrderInterceptors";
+} from "../package/highOrderInterceptors";
 import JestMock from "jest-mock";
 
 const BASE_URL = "https://example.com/";

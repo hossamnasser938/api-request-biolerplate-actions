@@ -1,4 +1,4 @@
-import { configAxiosInterceptors } from "../configAxiosInterceptors";
+import { configAxiosInterceptors } from "../package/configAxiosInterceptors";
 import axios from "axios";
 
 test("test configAxiosInterceptors", () => {

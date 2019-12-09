@@ -1,4 +1,4 @@
-import mapRequestUrlToConfigObject from "../mapRequestUrlToConfigObject";
+import mapRequestUrlToConfigObject from "../package/mapRequestUrlToConfigObject";
 
 test("test mapRequestUrlToConfigObject", () => {
   const action1Config = {

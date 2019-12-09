@@ -1,4 +1,4 @@
-import getDerivedActionTypes from "../getDerivedActionTypes";
+import getDerivedActionTypes from "../package/getDerivedActionTypes";
 
 test("test getDerivedActionTypes", () => {
   expect(getDerivedActionTypes(["BASE_ACTION"])).toEqual([
