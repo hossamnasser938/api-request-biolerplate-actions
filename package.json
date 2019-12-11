@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "babel src/ -d lib/",
+    "prepublish": "npm run build",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -20,9 +23,12 @@
     "axios": "^0.19.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.5",
+    "@babel/preset-flow": "^7.7.4",
     "babel-jest": "^24.9.0",
+    "flow-bin": "^0.113.0",
     "jest": "^24.9.0"
   }
 }
