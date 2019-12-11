@@ -1,3 +1,12 @@
+// @flow
+import type {
+  ActionConfigurationObject,
+  Dispatch,
+  RequestOnFullfilledInterceptor,
+  RequestOnRejectedInterceptor,
+  ResponseOnFullfilledInterceptor,
+  ResponseOnRejectedInterceptor
+} from "../package/types";
 import {
   highOrderRequestOnFullfilledInterceptor,
   highOrderRequestOnRejectedInterceptor,
@@ -6,27 +15,27 @@ import {
 } from "../package/highOrderInterceptors";
 import JestMock from "jest-mock";
 
-const BASE_URL = "https://example.com/";
-const action1Config = {
+const BASE_URL: string = "https://example.com/";
+const action1Config: ActionConfigurationObject = {
   requestUrl: "url1",
   baseActionType: "ACTION_1"
 };
 
-const action2Config = {
+const action2Config: ActionConfigurationObject = {
   requestUrl: "url2",
   baseActionType: "ACTION_2",
   noSuccess: true,
   noError: true
 };
 
-const action3Config = {
+const action3Config: ActionConfigurationObject = {
   requestUrl: "url3",
   baseActionType: "ACTION_3",
   noStart: true,
   noStop: true
 };
 
-const action4Config = {
+const action4Config: ActionConfigurationObject = {
   requestUrl: "url4",
   baseActionType: "ACTION_4",
   errorMessage: "failed"
@@ -39,11 +48,11 @@ const BaseActionsConfigurations = [
   action4Config
 ];
 
-let dispatch;
+let dispatch: Dispatch;
 
 // ___ test requestOnFullfilledInterceptor ___//
 describe("test requestOnFullfilledInterceptor", () => {
-  let requestOnFullfilledInterceptor;
+  let requestOnFullfilledInterceptor: RequestOnFullfilledInterceptor;
 
   beforeEach(() => {
     dispatch = JestMock.fn();
@@ -94,7 +103,7 @@ describe("test requestOnFullfilledInterceptor", () => {
 
 // ___ test requestOnRejectedInterceptor ___//
 describe("test requestOnRejectedInterceptor", () => {
-  let requestOnRejectedInterceptor;
+  let requestOnRejectedInterceptor: RequestOnRejectedInterceptor;
   const jsdomAlert = window.alert; // to avoid changing the environment
 
   beforeEach(() => {
@@ -123,7 +132,7 @@ describe("test requestOnRejectedInterceptor", () => {
 
 // ___ test responseOnFullfilledInterceptor ___//
 describe("test responseOnFullfilledInterceptor", () => {
-  let responseOnFullfilledInterceptor;
+  let responseOnFullfilledInterceptor: ResponseOnFullfilledInterceptor;
 
   beforeEach(() => {
     dispatch = JestMock.fn();
@@ -194,7 +203,7 @@ describe("test responseOnFullfilledInterceptor", () => {
 
 // ___ test responseOnFullfilledInterceptor ___//
 describe("test responseOnRejectedInterceptor", () => {
-  let responseOnRejectedInterceptor;
+  let responseOnRejectedInterceptor: ResponseOnRejectedInterceptor;
 
   beforeEach(() => {
     dispatch = JestMock.fn();

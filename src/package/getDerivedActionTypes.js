@@ -1,4 +1,7 @@
-export default baseActionTypes => {
+// @flow
+import type { BaseActionTypes, DerivedActionTypes } from "./types";
+
+export default (baseActionTypes: BaseActionTypes): DerivedActionTypes => {
   const derivedActionTypes = baseActionTypes.reduce((acc, cBaseActionType) => {
     const cDefaultActionTypes = [
       "START_" + cBaseActionType,

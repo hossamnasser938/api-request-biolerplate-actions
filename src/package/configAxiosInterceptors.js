@@ -1,3 +1,5 @@
+// @flow
+import type { Action, Dispatch, BaseActionTypes } from "./types";
 import axios from "axios";
 import {
   highOrderRequestOnFullfilledInterceptor,
@@ -7,10 +9,10 @@ import {
 } from "./highOrderInterceptors";
 
 export const configAxiosInterceptors = (
-  dispatch,
-  BASE_URL,
-  BaseActionsConfigurations
-) => {
+  dispatch: Dispatch,
+  BASE_URL: string,
+  BaseActionsConfigurations: BaseActionTypes
+): void => {
   axios.interceptors.request.use(
     highOrderRequestOnFullfilledInterceptor(
       dispatch,

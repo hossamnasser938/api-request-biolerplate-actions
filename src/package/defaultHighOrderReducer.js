@@ -1,10 +1,12 @@
+// @flow
+import type { State, Reducer, BaseActionTypes } from "./types";
 import getDerivedActionTypes from "./getDerivedActionTypes";
 
 export const defaultHighOrderReducer = (
-  initialState,
-  baseActionTypes,
-  reducer
-) => {
+  initialState: State,
+  baseActionTypes: BaseActionTypes,
+  reducer: Reducer
+): Reducer => {
   const derivedActionTypes = getDerivedActionTypes(baseActionTypes);
 
   return (state = initialState, { type, payload }) => {

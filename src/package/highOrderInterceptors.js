@@ -1,11 +1,20 @@
+// @flow
+import type {
+  Dispatch,
+  ActionConfigurationObject,
+  RequestOnFullfilledInterceptor,
+  RequestOnRejectedInterceptor,
+  ResponseOnFullfilledInterceptor,
+  ResponseOnRejectedInterceptor
+} from "./types";
 import mapRequestUrlToConfigObject from "./mapRequestUrlToConfigObject";
 
 export const highOrderRequestOnFullfilledInterceptor = (
-  dispatch,
-  BASE_URL,
-  BaseActionsConfigurations
-) => {
-  const requestOnFullfilledInterceptor = config => {
+  dispatch: Dispatch,
+  BASE_URL: string,
+  BaseActionsConfigurations: Array<ActionConfigurationObject>
+): RequestOnFullfilledInterceptor => {
+  const requestOnFullfilledInterceptor: RequestOnFullfilledInterceptor = config => {
     const requestUrlConfigObject = mapRequestUrlToConfigObject(
       config.url,
       BaseActionsConfigurations
@@ -24,11 +33,11 @@ export const highOrderRequestOnFullfilledInterceptor = (
 };
 
 export const highOrderRequestOnRejectedInterceptor = (
-  dispatch,
-  BASE_URL,
-  BaseActionsConfigurations
-) => {
-  const requestOnRejectedInterceptor = error => {
+  dispatch: Dispatch,
+  BASE_URL: string,
+  BaseActionsConfigurations: Array<ActionConfigurationObject>
+): RequestOnRejectedInterceptor => {
+  const requestOnRejectedInterceptor: RequestOnRejectedInterceptor = error => {
     alert("requestOnRejectedInterceptor");
 
     return Promise.reject(error);
@@ -38,11 +47,11 @@ export const highOrderRequestOnRejectedInterceptor = (
 };
 
 export const highOrderResponseOnFullfilledInterceptor = (
-  dispatch,
-  BASE_URL,
-  BaseActionsConfigurations
-) => {
-  const responseOnFullfilledInterceptor = response => {
+  dispatch: Dispatch,
+  BASE_URL: string,
+  BaseActionsConfigurations: Array<ActionConfigurationObject>
+): ResponseOnFullfilledInterceptor => {
+  const responseOnFullfilledInterceptor: ResponseOnFullfilledInterceptor = response => {
     const requestUrlConfigObject = mapRequestUrlToConfigObject(
       response.config.url.split(BASE_URL)[1],
       BaseActionsConfigurations
@@ -68,11 +77,11 @@ export const highOrderResponseOnFullfilledInterceptor = (
 };
 
 export const highOrderResponseOnRejectedInterceptor = (
-  dispatch,
-  BASE_URL,
-  BaseActionsConfigurations
-) => {
-  const responseOnRejectedInterceptor = error => {
+  dispatch: Dispatch,
+  BASE_URL: string,
+  BaseActionsConfigurations: Array<ActionConfigurationObject>
+): ResponseOnRejectedInterceptor => {
+  const responseOnRejectedInterceptor: ResponseOnRejectedInterceptor = error => {
     const requestUrlConfigObject = mapRequestUrlToConfigObject(
       error.config.url.split(BASE_URL)[1],
       BaseActionsConfigurations

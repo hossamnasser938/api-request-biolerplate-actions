@@ -1,17 +1,19 @@
+// @flow
+import type { ActionConfigurationObject } from "../package/types";
 import mapRequestUrlToConfigObject from "../package/mapRequestUrlToConfigObject";
 
 test("test mapRequestUrlToConfigObject", () => {
-  const action1Config = {
+  const action1Config: ActionConfigurationObject = {
     requestUrl: "url1",
     baseActionType: "ACTION_1"
   };
 
-  const action2Config = {
+  const action2Config: ActionConfigurationObject = {
     requestUrl: "url2",
     baseActionType: "ACTION_2"
   };
 
-  const action3Config = {
+  const action3Config: ActionConfigurationObject = {
     requestUrl: "url3",
     baseActionType: "ACTION_3"
   };

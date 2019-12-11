@@ -1,8 +1,10 @@
+// @flow
+import type { Reducer } from "../package/types";
 import { defaultHighOrderReducer } from "../package/defaultHighOrderReducer";
 
 test("test defaultHighOrderReducer", () => {
   // ___ test ordinary reducer ___ //
-  const reducer = (state = {}, { type, payload }) => {
+  const reducer: Reducer = (state = {}, { type, payload }) => {
     switch (type) {
       case "SUCCESS_BASE_ACTION":
         return {
@@ -53,7 +55,7 @@ test("test defaultHighOrderReducer", () => {
 
   // ___ test reducer after being passed to defaultHighOrderReducer ___ //
 
-  const defaultReducer = defaultHighOrderReducer(
+  const defaultReducer: Reducer = defaultHighOrderReducer(
     {},
     ["BASE_ACTION", "BASE_ACTION_1"],
     reducer

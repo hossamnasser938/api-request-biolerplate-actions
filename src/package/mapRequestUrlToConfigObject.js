@@ -1,4 +1,10 @@
-export default (requestUrl, BaseActionsConfigurations) => {
+//@flow
+import type { ActionConfigurationObject } from "./types";
+
+export default (
+  requestUrl: string,
+  BaseActionsConfigurations: Array<ActionConfigurationObject>
+): ActionConfigurationObject => {
   const configObject = BaseActionsConfigurations.find(
     config => config.requestUrl === requestUrl.split("?")[0]
   );
