@@ -1,7 +1,6 @@
 // @flow
 import type {
   Dispatch,
-  ActionConfigurationObject,
   RequestOnFullfilledInterceptor,
   RequestOnRejectedInterceptor,
   ResponseOnFullfilledInterceptor,

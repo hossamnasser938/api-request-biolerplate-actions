@@ -1,8 +1,8 @@
-import type { ActionConfigurationObject } from "./types";
+import type { ApiRequestConfigObject } from "./types";
 
 const configs = [];
 
-export const pushConfigs = (extraConfigs: Array<ActionConfigurationObject>) => {
+export const pushConfigs = (extraConfigs: Array<ApiRequestConfigObject>) => {
   configs.push(...extraConfigs);
 };
 

@@ -1,4 +1,4 @@
-import type { ActionConfigurationObject } from "../package/types";
+import type { ApiRequestConfigObject } from "../package/types";
 import configs, {
   pushConfigs,
   clearConfigs
@@ -10,28 +10,32 @@ afterAll(clearConfigs);
 test("test pushing to apiRequestsConfigs", () => {
   expect(configs).toEqual([]);
 
-  const action1Config: ActionConfigurationObject = {
+  const apiRequestConfig1: ApiRequestConfigObject = {
     requestUrl: "url1",
     baseActionType: "ACTION_1"
   };
 
-  const action2Config: ActionConfigurationObject = {
+  const apiRequestConfig2: ApiRequestConfigObject = {
     requestUrl: "url2",
     baseActionType: "ACTION_2"
   };
 
-  const action3Config: ActionConfigurationObject = {
+  const apiRequestConfig3: ApiRequestConfigObject = {
     requestUrl: "url3",
     baseActionType: "ACTION_3"
   };
 
-  pushConfigs([action1Config, action2Config]);
+  pushConfigs([apiRequestConfig1, apiRequestConfig2]);
 
-  expect(configs).toEqual([action1Config, action2Config]);
+  expect(configs).toEqual([apiRequestConfig1, apiRequestConfig2]);
 
-  pushConfigs([action3Config]);
+  pushConfigs([apiRequestConfig3]);
 
-  expect(configs).toEqual([action1Config, action2Config, action3Config]);
+  expect(configs).toEqual([
+    apiRequestConfig1,
+    apiRequestConfig2,
+    apiRequestConfig3
+  ]);
 
   clearConfigs();
 

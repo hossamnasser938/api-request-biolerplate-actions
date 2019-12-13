@@ -1,11 +1,11 @@
 // @flow
-import type { State, Reducer, ActionConfigurationObject } from "./types";
+import type { State, Reducer, ApiRequestConfigObject } from "./types";
 import getDerivedActionTypes from "./getDerivedActionTypes";
 import { pushConfigs } from "./apiRequestsConfigs";
 
 export const defaultHighOrderReducer = (
   initialState: State,
-  apiRequestsConfigsSubset: Array<ActionConfigurationObject>,
+  apiRequestsConfigsSubset: Array<ApiRequestConfigObject>,
   reducer: Reducer
 ): Reducer => {
   pushConfigs(apiRequestsConfigsSubset);

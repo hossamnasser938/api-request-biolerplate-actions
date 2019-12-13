@@ -9,7 +9,7 @@ export type Reducer = (state: State, action: Action) => State;
 export type BaseActionTypes = Array<string>;
 export type DerivedActionTypes = array<string>;
 
-export type ActionConfigurationObject = {|
+export type ApiRequestConfigObject = {|
   requestUrl: string,
   baseActionType: string,
   errorMessage?: string,

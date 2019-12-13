@@ -1,11 +1,11 @@
 //@flow
-import type { ActionConfigurationObject } from "./types";
+import type { ApiRequestConfigObject } from "./types";
 
 export default (
   requestUrl: string,
-  BaseActionsConfigurations: Array<ActionConfigurationObject>
-): ActionConfigurationObject => {
-  const configObject = BaseActionsConfigurations.find(
+  apiRequestsConfigs: Array<ApiRequestConfigObject>
+): ApiRequestConfigObject => {
+  const configObject = apiRequestsConfigs.find(
     config => config.requestUrl === requestUrl.split("?")[0]
   );
 
