@@ -13,40 +13,44 @@ import {
   highOrderResponseOnFullfilledInterceptor,
   highOrderResponseOnRejectedInterceptor
 } from "../package/highOrderInterceptors";
+import { pushConfigs } from "../package/apiRequestsConfigs";
 import JestMock from "jest-mock";
 
 const BASE_URL: string = "https://example.com/";
-const action1Config: ActionConfigurationObject = {
+
+const apiRequestConfig1: ActionConfigurationObject = {
   requestUrl: "url1",
   baseActionType: "ACTION_1"
 };
 
-const action2Config: ActionConfigurationObject = {
+const apiRequestConfig2: ActionConfigurationObject = {
   requestUrl: "url2",
   baseActionType: "ACTION_2",
   noSuccess: true,
   noError: true
 };
 
-const action3Config: ActionConfigurationObject = {
+const apiRequestConfig3: ActionConfigurationObject = {
   requestUrl: "url3",
   baseActionType: "ACTION_3",
   noStart: true,
   noStop: true
 };
 
-const action4Config: ActionConfigurationObject = {
+const apiRequestConfig4: ActionConfigurationObject = {
   requestUrl: "url4",
   baseActionType: "ACTION_4",
   errorMessage: "failed"
 };
 
-const BaseActionsConfigurations = [
-  action1Config,
-  action2Config,
-  action3Config,
-  action4Config
+const apiRequestConfigs = [
+  apiRequestConfig1,
+  apiRequestConfig2,
+  apiRequestConfig3,
+  apiRequestConfig4
 ];
+
+pushConfigs(apiRequestConfigs);
 
 let dispatch: Dispatch;
 
@@ -59,8 +63,7 @@ describe("test requestOnFullfilledInterceptor", () => {
 
     requestOnFullfilledInterceptor = highOrderRequestOnFullfilledInterceptor(
       dispatch,
-      BASE_URL,
-      BaseActionsConfigurations
+      BASE_URL
     );
   });
 
@@ -113,8 +116,7 @@ describe("test requestOnRejectedInterceptor", () => {
 
     requestOnRejectedInterceptor = highOrderRequestOnRejectedInterceptor(
       dispatch,
-      BASE_URL,
-      BaseActionsConfigurations
+      BASE_URL
     );
   });
 
@@ -139,8 +141,7 @@ describe("test responseOnFullfilledInterceptor", () => {
 
     responseOnFullfilledInterceptor = highOrderResponseOnFullfilledInterceptor(
       dispatch,
-      BASE_URL,
-      BaseActionsConfigurations
+      BASE_URL
     );
   });
 
@@ -210,8 +211,7 @@ describe("test responseOnRejectedInterceptor", () => {
 
     responseOnRejectedInterceptor = highOrderResponseOnRejectedInterceptor(
       dispatch,
-      BASE_URL,
-      BaseActionsConfigurations
+      BASE_URL
     );
   });
 

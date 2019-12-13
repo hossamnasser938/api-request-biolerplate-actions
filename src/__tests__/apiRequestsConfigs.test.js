@@ -1,5 +1,11 @@
 import type { ActionConfigurationObject } from "../package/types";
-import configs, { pushConfigs } from "../package/apiRequestsConfigs";
+import configs, {
+  pushConfigs,
+  clearConfigs
+} from "../package/apiRequestsConfigs";
+
+beforeAll(clearConfigs);
+afterAll(clearConfigs);
 
 test("test pushing to apiRequestsConfigs", () => {
   expect(configs).toEqual([]);
@@ -26,4 +32,8 @@ test("test pushing to apiRequestsConfigs", () => {
   pushConfigs([action3Config]);
 
   expect(configs).toEqual([action1Config, action2Config, action3Config]);
+
+  clearConfigs();
+
+  expect(configs).toEqual([]);
 });

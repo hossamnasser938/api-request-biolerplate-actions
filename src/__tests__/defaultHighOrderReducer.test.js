@@ -1,6 +1,10 @@
 // @flow
 import type { Reducer } from "../package/types";
 import { defaultHighOrderReducer } from "../package/defaultHighOrderReducer";
+import { pushConfigs, clearConfigs } from "../package/apiRequestsConfigs";
+
+beforeAll(clearConfigs);
+afterAll(clearConfigs);
 
 test("test defaultHighOrderReducer", () => {
   // ___ test ordinary reducer ___ //
@@ -55,9 +59,14 @@ test("test defaultHighOrderReducer", () => {
 
   // ___ test reducer after being passed to defaultHighOrderReducer ___ //
 
+  const apiRequestsConfigsSubset = [
+    { requestUrl: "endpoint", baseActionType: "BASE_ACTION" },
+    { requestUrl: "endpoint1", baseActionType: "BASE_ACTION_1" }
+  ];
+
   const defaultReducer: Reducer = defaultHighOrderReducer(
     {},
-    ["BASE_ACTION", "BASE_ACTION_1"],
+    apiRequestsConfigsSubset,
     reducer
   );
 

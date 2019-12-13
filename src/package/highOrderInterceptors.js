@@ -7,17 +7,17 @@ import type {
   ResponseOnFullfilledInterceptor,
   ResponseOnRejectedInterceptor
 } from "./types";
+import apiRequestsConfigs from "./apiRequestsConfigs";
 import mapRequestUrlToConfigObject from "./mapRequestUrlToConfigObject";
 
 export const highOrderRequestOnFullfilledInterceptor = (
   dispatch: Dispatch,
-  BASE_URL: string,
-  BaseActionsConfigurations: Array<ActionConfigurationObject>
+  BASE_URL: string
 ): RequestOnFullfilledInterceptor => {
   const requestOnFullfilledInterceptor: RequestOnFullfilledInterceptor = config => {
     const requestUrlConfigObject = mapRequestUrlToConfigObject(
       config.url,
-      BaseActionsConfigurations
+      apiRequestsConfigs
     );
 
     if (!requestUrlConfigObject.noStart) {
@@ -34,8 +34,7 @@ export const highOrderRequestOnFullfilledInterceptor = (
 
 export const highOrderRequestOnRejectedInterceptor = (
   dispatch: Dispatch,
-  BASE_URL: string,
-  BaseActionsConfigurations: Array<ActionConfigurationObject>
+  BASE_URL: string
 ): RequestOnRejectedInterceptor => {
   const requestOnRejectedInterceptor: RequestOnRejectedInterceptor = error => {
     alert("requestOnRejectedInterceptor");
@@ -48,13 +47,12 @@ export const highOrderRequestOnRejectedInterceptor = (
 
 export const highOrderResponseOnFullfilledInterceptor = (
   dispatch: Dispatch,
-  BASE_URL: string,
-  BaseActionsConfigurations: Array<ActionConfigurationObject>
+  BASE_URL: string
 ): ResponseOnFullfilledInterceptor => {
   const responseOnFullfilledInterceptor: ResponseOnFullfilledInterceptor = response => {
     const requestUrlConfigObject = mapRequestUrlToConfigObject(
       response.config.url.split(BASE_URL)[1],
-      BaseActionsConfigurations
+      apiRequestsConfigs
     );
 
     if (!requestUrlConfigObject.noStop) {
@@ -78,13 +76,12 @@ export const highOrderResponseOnFullfilledInterceptor = (
 
 export const highOrderResponseOnRejectedInterceptor = (
   dispatch: Dispatch,
-  BASE_URL: string,
-  BaseActionsConfigurations: Array<ActionConfigurationObject>
+  BASE_URL: string
 ): ResponseOnRejectedInterceptor => {
   const responseOnRejectedInterceptor: ResponseOnRejectedInterceptor = error => {
     const requestUrlConfigObject = mapRequestUrlToConfigObject(
       error.config.url.split(BASE_URL)[1],
-      BaseActionsConfigurations
+      apiRequestsConfigs
     );
 
     if (!requestUrlConfigObject.noStop) {
