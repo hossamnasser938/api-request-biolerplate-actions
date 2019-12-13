@@ -1,8 +1,6 @@
 // @flow
 import type { DerivedActionTypes, ApiRequestConfigObject } from "./types";
 
-import mapRequestUrlToConfigObject from "./mapRequestUrlToConfigObject";
-
 export default (
   apiRequestsConfigsSubset: Array<ApiRequestConfigObject>
 ): DerivedActionTypes => {

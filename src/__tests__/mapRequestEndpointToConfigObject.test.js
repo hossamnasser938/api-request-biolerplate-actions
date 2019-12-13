@@ -1,8 +1,8 @@
 // @flow
 import type { ApiRequestConfigObject } from "../package/types";
-import mapRequestUrlToConfigObject from "../package/mapRequestUrlToConfigObject";
+import mapRequestEndpointToConfigObject from "../package/mapRequestEndpointToConfigObject";
 
-test("test mapRequestUrlToConfigObject", () => {
+test("test mapRequestEndpointToConfigObject", () => {
   const apiRequestConfig1: ApiRequestConfigObject = {
     requestEndpoint: "url1",
     baseActionType: "ACTION_1"
@@ -24,19 +24,22 @@ test("test mapRequestUrlToConfigObject", () => {
     apiRequestConfig3
   ];
 
-  expect(mapRequestUrlToConfigObject("url1", BaseActionsConfigurations)).toBe(
-    apiRequestConfig1
-  );
-
-  expect(mapRequestUrlToConfigObject("url2", BaseActionsConfigurations)).toBe(
-    apiRequestConfig2
-  );
+  expect(
+    mapRequestEndpointToConfigObject("url1", BaseActionsConfigurations)
+  ).toBe(apiRequestConfig1);
 
   expect(
-    mapRequestUrlToConfigObject("url3?param=value", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject("url2", BaseActionsConfigurations)
+  ).toBe(apiRequestConfig2);
+
+  expect(
+    mapRequestEndpointToConfigObject(
+      "url3?param=value",
+      BaseActionsConfigurations
+    )
   ).toBe(apiRequestConfig3);
 
   expect(() =>
-    mapRequestUrlToConfigObject("action3", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject("action3", BaseActionsConfigurations)
   ).toThrow("strange request endpoint: action3");
 });
