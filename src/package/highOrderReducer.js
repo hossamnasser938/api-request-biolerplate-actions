@@ -3,7 +3,7 @@ import type { State, Reducer, ApiRequestConfigObject } from "./types";
 import getDerivedActionTypes from "./getDerivedActionTypes";
 import { pushConfigs } from "./apiRequestsConfigs";
 
-export const defaultHighOrderReducer = (
+export const highOrderReducer = (
   initialState: State,
   apiRequestsConfigsSubset: Array<ApiRequestConfigObject>,
   reducer: Reducer

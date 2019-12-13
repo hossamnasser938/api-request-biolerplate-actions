@@ -1,12 +1,12 @@
 // @flow
 import type { Reducer } from "../package/types";
-import { defaultHighOrderReducer } from "../package/defaultHighOrderReducer";
+import { highOrderReducer } from "../package/highOrderReducer";
 import { pushConfigs, clearConfigs } from "../package/apiRequestsConfigs";
 
 beforeAll(clearConfigs);
 afterAll(clearConfigs);
 
-test("test defaultHighOrderReducer", () => {
+test("test highOrderReducer", () => {
   // ___ test ordinary reducer ___ //
   const reducer: Reducer = (state = {}, { type, payload }) => {
     switch (type) {
@@ -57,14 +57,14 @@ test("test defaultHighOrderReducer", () => {
     reducer({}, { type: "ERROR_BASE_ACTION", payload: { message: "error" } })
   ).toEqual({});
 
-  // ___ test reducer after being passed to defaultHighOrderReducer ___ //
+  // ___ test reducer after being passed to highOrderReducer ___ //
 
   const apiRequestsConfigsSubset = [
     { requestEndpoint: "endpoint", baseActionType: "BASE_ACTION" },
     { requestEndpoint: "endpoint1", baseActionType: "BASE_ACTION_1" }
   ];
 
-  const defaultReducer: Reducer = defaultHighOrderReducer(
+  const defaultReducer: Reducer = highOrderReducer(
     {},
     apiRequestsConfigsSubset,
     reducer
