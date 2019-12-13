@@ -1,16 +1,31 @@
 // @flow
-import type { BaseActionTypes, DerivedActionTypes } from "./types";
+import type { DerivedActionTypes, ApiRequestConfigObject } from "./types";
 
-export default (baseActionTypes: BaseActionTypes): DerivedActionTypes => {
-  const derivedActionTypes = baseActionTypes.reduce((acc, cBaseActionType) => {
-    const cDefaultActionTypes = [
-      "START_" + cBaseActionType,
-      "STOP_" + cBaseActionType,
-      "ERROR_" + cBaseActionType
-    ];
+import mapRequestUrlToConfigObject from "./mapRequestUrlToConfigObject";
 
-    return acc.concat(cBaseActionType ? cDefaultActionTypes : []);
-  }, []);
+export default (
+  apiRequestsConfigsSubset: Array<ApiRequestConfigObject>
+): DerivedActionTypes => {
+  const derivedActionTypes = apiRequestsConfigsSubset.reduce(
+    (acc, apiRequestConfig) => {
+      const defaultActionTypes = [];
+
+      if (!apiRequestConfig.noStart) {
+        defaultActionTypes.push("START_" + apiRequestConfig.baseActionType);
+      }
+
+      if (!apiRequestConfig.noStop) {
+        defaultActionTypes.push("STOP_" + apiRequestConfig.baseActionType);
+      }
+
+      if (!apiRequestConfig.noError) {
+        defaultActionTypes.push("ERROR_" + apiRequestConfig.baseActionType);
+      }
+
+      return acc.concat(defaultActionTypes);
+    },
+    []
+  );
 
   return derivedActionTypes;
 };

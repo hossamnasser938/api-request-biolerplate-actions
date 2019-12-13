@@ -10,11 +10,7 @@ export const defaultHighOrderReducer = (
 ): Reducer => {
   pushConfigs(apiRequestsConfigsSubset);
 
-  const baseActionTypes = apiRequestsConfigsSubset.map(
-    item => item.baseActionType
-  );
-
-  const derivedActionTypes = getDerivedActionTypes(baseActionTypes);
+  const derivedActionTypes = getDerivedActionTypes(apiRequestsConfigsSubset);
 
   return (state = initialState, { type, payload }) => {
     if (derivedActionTypes.includes(type)) {
