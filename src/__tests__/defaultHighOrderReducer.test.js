@@ -60,8 +60,8 @@ test("test defaultHighOrderReducer", () => {
   // ___ test reducer after being passed to defaultHighOrderReducer ___ //
 
   const apiRequestsConfigsSubset = [
-    { requestUrl: "endpoint", baseActionType: "BASE_ACTION" },
-    { requestUrl: "endpoint1", baseActionType: "BASE_ACTION_1" }
+    { requestEndpoint: "endpoint", baseActionType: "BASE_ACTION" },
+    { requestEndpoint: "endpoint1", baseActionType: "BASE_ACTION_1" }
   ];
 
   const defaultReducer: Reducer = defaultHighOrderReducer(

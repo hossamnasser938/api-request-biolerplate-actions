@@ -19,26 +19,26 @@ import JestMock from "jest-mock";
 const BASE_URL: string = "https://example.com/";
 
 const apiRequestConfig1: ApiRequestConfigObject = {
-  requestUrl: "url1",
+  requestEndpoint: "url1",
   baseActionType: "ACTION_1"
 };
 
 const apiRequestConfig2: ApiRequestConfigObject = {
-  requestUrl: "url2",
+  requestEndpoint: "url2",
   baseActionType: "ACTION_2",
   noSuccess: true,
   noError: true
 };
 
 const apiRequestConfig3: ApiRequestConfigObject = {
-  requestUrl: "url3",
+  requestEndpoint: "url3",
   baseActionType: "ACTION_3",
   noStart: true,
   noStop: true
 };
 
 const apiRequestConfig4: ApiRequestConfigObject = {
-  requestUrl: "url4",
+  requestEndpoint: "url4",
   baseActionType: "ACTION_4",
   errorMessage: "failed"
 };

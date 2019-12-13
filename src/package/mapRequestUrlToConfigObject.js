@@ -2,16 +2,16 @@
 import type { ApiRequestConfigObject } from "./types";
 
 export default (
-  requestUrl: string,
+  requestEndpoint: string,
   apiRequestsConfigs: Array<ApiRequestConfigObject>
 ): ApiRequestConfigObject => {
   const configObject = apiRequestsConfigs.find(
-    config => config.requestUrl === requestUrl.split("?")[0]
+    config => config.requestEndpoint === requestEndpoint.split("?")[0]
   );
 
   if (configObject) {
     return configObject;
   } else {
-    throw new Error("strange request url: " + requestUrl);
+    throw new Error("strange request endpoint: " + requestEndpoint);
   }
 };

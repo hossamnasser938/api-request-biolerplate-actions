@@ -10,7 +10,7 @@ export type BaseActionTypes = Array<string>;
 export type DerivedActionTypes = array<string>;
 
 export type ApiRequestConfigObject = {|
-  requestUrl: string,
+  requestEndpoint: string,
   baseActionType: string,
   errorMessage?: string,
   noStart?: boolean,
