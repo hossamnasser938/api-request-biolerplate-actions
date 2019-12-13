@@ -1,5 +1,7 @@
 import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
+export type ErrorHandler = string => void;
+
 // redux stuff
 export type Action = any;
 export type State = any;

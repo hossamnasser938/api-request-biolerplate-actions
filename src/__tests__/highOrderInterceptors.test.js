@@ -14,6 +14,10 @@ import {
   highOrderResponseOnRejectedInterceptor
 } from "../package/highOrderInterceptors";
 import { pushConfigs } from "../package/apiRequestsConfigs";
+import getErrorHandler, {
+  setErrorHandler,
+  resetErrorHandler
+} from "../package/getErrorHandler";
 import JestMock from "jest-mock";
 
 const BASE_URL: string = "https://example.com/";
@@ -213,6 +217,12 @@ describe("test responseOnRejectedInterceptor", () => {
       dispatch,
       BASE_URL
     );
+
+    resetErrorHandler();
+  });
+
+  afterEach(() => {
+    resetErrorHandler();
   });
 
   test("test responseOnRejectedInterceptor when actionConfig set to its default and url attribute returns preceded by BASE_URL", () => {
@@ -270,7 +280,28 @@ describe("test responseOnRejectedInterceptor", () => {
     });
   });
 
-  test("test responseOnRejectedInterceptor when actionConfig has errorMessage set to 'failed'", () => {
+  test("test responseOnRejectedInterceptor when actionConfig has errorMessage set to 'failed' and there exist errorHandler", () => {
+    const errorHandler = JestMock.fn();
+    setErrorHandler(errorHandler);
+
+    const axiosError = {
+      config: {
+        url: BASE_URL + "url4",
+        baseURL: BASE_URL
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    responseOnRejectedInterceptor(axiosError);
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_4" });
+    expect(errorHandler).toHaveBeenCalledTimes(1);
+    expect(errorHandler).toHaveBeenCalledWith("failed");
+  });
+
+  test("test responseOnRejectedInterceptor when actionConfig has errorMessage set to 'failed' and there does not exist errorHandler", () => {
     const axiosError = {
       config: {
         url: BASE_URL + "url4",

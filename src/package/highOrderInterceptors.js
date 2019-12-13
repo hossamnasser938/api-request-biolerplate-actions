@@ -8,6 +8,7 @@ import type {
 } from "./types";
 import apiRequestsConfigs from "./apiRequestsConfigs";
 import mapRequestEndpointToConfigObject from "./mapRequestEndpointToConfigObject.js";
+import getErrorHandler from "./getErrorHandler";
 
 export const highOrderRequestOnFullfilledInterceptor = (
   dispatch: Dispatch,
@@ -89,7 +90,11 @@ export const highOrderResponseOnRejectedInterceptor = (
       });
     }
 
-    if (!requestUrlConfigObject.noError) {
+    const errorHandler = getErrorHandler();
+
+    if (errorHandler && requestUrlConfigObject.errorMessage) {
+      errorHandler(requestUrlConfigObject.errorMessage);
+    } else if (!requestUrlConfigObject.noError) {
       dispatch({
         type: "ERROR_" + requestUrlConfigObject.baseActionType,
         payload: requestUrlConfigObject.errorMessage

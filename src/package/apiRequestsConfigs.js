@@ -1,3 +1,4 @@
+// @flow
 import type { ApiRequestConfigObject } from "./types";
 
 const configs = [];
