@@ -8,10 +8,7 @@ import {
   highOrderResponseOnRejectedInterceptor
 } from "./highOrderInterceptors";
 
-export const configAxiosInterceptors = (
-  dispatch: Dispatch,
-  BASE_URL: string
-): void => {
+export const config = (dispatch: Dispatch, BASE_URL: string): void => {
   axios.interceptors.request.use(
     highOrderRequestOnFullfilledInterceptor(dispatch, BASE_URL),
     highOrderRequestOnRejectedInterceptor(dispatch, BASE_URL)
