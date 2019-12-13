@@ -1,10 +1,10 @@
 // @flow
-import type { DerivedActionTypes, ApiRequestConfigObject } from "./types";
+import type { ApiRequestConfigObject } from "./types";
 
 export default (
   apiRequestsConfigsSubset: Array<ApiRequestConfigObject>
-): DerivedActionTypes => {
-  const derivedActionTypes = apiRequestsConfigsSubset.reduce(
+): Array<string> => {
+  const derivedActionTypes: Array<string> = apiRequestsConfigsSubset.reduce(
     (acc, apiRequestConfig) => {
       const defaultActionTypes = [];
 

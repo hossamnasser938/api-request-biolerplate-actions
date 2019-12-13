@@ -6,9 +6,6 @@ export type State = any;
 export type Dispatch = (action: Action) => any;
 export type Reducer = (state: State, action: Action) => State;
 
-export type BaseActionTypes = Array<string>;
-export type DerivedActionTypes = array<string>;
-
 export type ApiRequestConfigObject = {|
   requestEndpoint: string,
   baseActionType: string,
