@@ -295,8 +295,12 @@ describe("test responseOnRejectedInterceptor", () => {
 
     responseOnRejectedInterceptor(axiosError);
 
-    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_4" });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: "ERROR_ACTION_4",
+      payload: { message: "failed" }
+    });
     expect(errorHandler).toHaveBeenCalledTimes(1);
     expect(errorHandler).toHaveBeenCalledWith("failed");
   });

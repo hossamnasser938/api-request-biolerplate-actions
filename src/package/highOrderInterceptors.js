@@ -94,7 +94,9 @@ export const highOrderResponseOnRejectedInterceptor = (
 
     if (errorHandler && requestUrlConfigObject.errorMessage) {
       errorHandler(requestUrlConfigObject.errorMessage);
-    } else if (!requestUrlConfigObject.noError) {
+    }
+
+    if (!requestUrlConfigObject.noError) {
       dispatch({
         type: "ERROR_" + requestUrlConfigObject.baseActionType,
         payload: requestUrlConfigObject.errorMessage
