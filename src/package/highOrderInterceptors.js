@@ -103,7 +103,12 @@ export const highOrderResponseOnRejectedInterceptor = (
           ? { message: requestUrlConfigObject.errorMessage }
           : error
       });
-    } else {
+    }
+
+    if (
+      (!errorHandler || !requestUrlConfigObject.errorMessage) &&
+      requestUrlConfigObject.noError
+    ) {
       return Promise.reject(error);
     }
   };

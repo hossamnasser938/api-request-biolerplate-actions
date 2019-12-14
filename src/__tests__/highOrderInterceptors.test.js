@@ -47,11 +47,18 @@ const apiRequestConfig4: ApiRequestConfigObject = {
   errorMessage: "failed"
 };
 
+const apiRequestConfig5: ApiRequestConfigObject = {
+  requestEndpoint: "url5",
+  baseActionType: "ACTION_5",
+  noError: true
+};
+
 const apiRequestConfigs = [
   apiRequestConfig1,
   apiRequestConfig2,
   apiRequestConfig3,
-  apiRequestConfig4
+  apiRequestConfig4,
+  apiRequestConfig5
 ];
 
 pushConfigs(apiRequestConfigs);
@@ -235,7 +242,7 @@ describe("test responseOnRejectedInterceptor", () => {
       // other irrelevant attributes ...
     };
 
-    responseOnRejectedInterceptor(axiosError);
+    expect(responseOnRejectedInterceptor(axiosError)).toBeUndefined();
 
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_1" });
@@ -245,7 +252,7 @@ describe("test responseOnRejectedInterceptor", () => {
     });
   });
 
-  test("test responseOnRejectedInterceptor when actionConfig has noError set to true", () => {
+  test("test responseOnRejectedInterceptor when actionConfig has noError set to true, no errorMessage", async () => {
     const axiosError = {
       config: {
         url: BASE_URL + "url2",
@@ -255,7 +262,9 @@ describe("test responseOnRejectedInterceptor", () => {
       // other irrelevant attributes ...
     };
 
-    responseOnRejectedInterceptor(axiosError);
+    await expect(responseOnRejectedInterceptor(axiosError)).rejects.toBe(
+      axiosError
+    );
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_2" });
@@ -271,7 +280,7 @@ describe("test responseOnRejectedInterceptor", () => {
       // other irrelevant attributes ...
     };
 
-    responseOnRejectedInterceptor(axiosError);
+    expect(responseOnRejectedInterceptor(axiosError)).toBeUndefined();
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
@@ -293,7 +302,7 @@ describe("test responseOnRejectedInterceptor", () => {
       // other irrelevant attributes ...
     };
 
-    responseOnRejectedInterceptor(axiosError);
+    expect(responseOnRejectedInterceptor(axiosError)).toBeUndefined();
 
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_4" });
@@ -315,7 +324,7 @@ describe("test responseOnRejectedInterceptor", () => {
       // other irrelevant attributes ...
     };
 
-    responseOnRejectedInterceptor(axiosError);
+    expect(responseOnRejectedInterceptor(axiosError)).toBeUndefined();
 
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_4" });
@@ -323,5 +332,23 @@ describe("test responseOnRejectedInterceptor", () => {
       type: "ERROR_ACTION_4",
       payload: { message: "failed" }
     });
+  });
+
+  test("test that responseOnRejectedInterceptor rejects when actionConfig has no errorMessage and noError is set to true", async () => {
+    const axiosError = {
+      config: {
+        url: BASE_URL + "url5",
+        baseURL: BASE_URL
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    await expect(responseOnRejectedInterceptor(axiosError)).rejects.toBe(
+      axiosError
+    );
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_5" });
   });
 });
