@@ -2,12 +2,12 @@
 
 - For the most of api requests you make in your React/React-Native app, you need to dispatch boilerplate redux actions such as:
 
-  - START_LOADING: before the request to show any loading feedback for the user.
-  - STOP_LOADING: after the request to hide loading feedback for the user.
-  - SET_SUCCESS: if the request succeeded to handle the response and update app state.
-  - SET_ERROR: if the request failed to handle the error and may be show an error message in the relevent screen.
+  - START: before sending the request to show any loading feedback for the user.
+  - STOP: after the request has been succeeded or failed to hide loading feedback.
+  - SUCCESS: if the request has beensucceeded to handle the response and update app state.
+  - ERROR: if the request has been failed to handle the error and may be show an error message in the relevent screen.
 
-- These actions help accomplish separation of concerns so that the UI is kept separate from the app business logic. However, this makes api requests have boilerplate code that you should duplicate each time. This package uses axios interceptors to dispatch such boilerplate actions for you and also handle them in their relevant reducer letting you care about success case only. It also gives you the ability to decide what actions to dispatch for which requests. So if you have a request that you do not care if it fails, you have a way to force the package to not dispatch SET_ERROR for such request. This applies to all actions not just SET_ERROR.
+- These actions are necessary to keep the user aware of what is going on. However, this makes api requests have boilerplate code that you should duplicate each time. This package uses axios interceptors to dispatch such boilerplate actions for you and also handle them in their relevant reducer letting you care about success case only. It also gives you the ability to decide what actions to dispatch for which requests. So if you have a request that you do not care if it fails, you have a way to force the package to not dispatch SET_ERROR for such request. This applies to all actions not just SET_ERROR.
 
 ## Usage
 
@@ -17,7 +17,7 @@
 export const GET_DATA = "GET_DATA";
 ```
 
-- To make a request action:
+- To define an api request action creator:
 
 ```js
 export const getData = value => (dispatch, getState) => {
@@ -25,9 +25,9 @@ export const getData = value => (dispatch, getState) => {
 };
 ```
 
-This is how a basic api request action should look like.
+This is how a basic api request action creator should look like.
 
-- To get these actions handled for you in a given reducer, wrap your reducer with `highOrderReducer`:
+- To get these boilerplate actions handled for you in a given reducer, wrap your reducer with `highOrderReducer`:
 
 ```js
 import {highOrderReducer} from 'api-request-boilerplate-actions';
@@ -55,7 +55,7 @@ const outOfTheBoxReducer = highOrderReducer(
 // use outOfTheBoxReducer instead of myReducer
 ```
 
-now you get these attributes handled for you in the reducer whenever you make getData request:
+now you get these attributes handled for you in outOfTheBoxReducer whenever you make getData request:
 
 - GET_DATA + 'LOADING'
 - GET_DATA + 'ERROR'
@@ -101,7 +101,7 @@ config(store.dispatch, "https://example.come/api/", errorMessage =>
   }
 ```
 
-Note that only 2 attributes are mandatory: `requestEndpoint` which is the endpoint this action targets and `baseActionType` which is the action type this endpoint should mapped to. Other attributes are optional. The attributes `noStart`, `noStop`, and `noError` can be set to true whenever you do not want the package to dispatch an action neither handle that action in the reducer for a given request. `noSuccess` can be set to true whenever you do not want the package to dispatch success action for a given request.
+Note that only 2 attributes are mandatory: `requestEndpoint` which is the endpoint this action targets and `baseActionType` which is the action type this endpoint should be mapped to. The rest of attributes are optional. The attributes `noStart`, `noStop`, and `noError` can be set to true whenever you do not want the package to dispatch an action neither handle that action in the reducer for a given request. `noSuccess` can be set to true whenever you do not want the package to dispatch success action for a given request.
 
 ## Example
 
