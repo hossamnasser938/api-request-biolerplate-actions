@@ -57,8 +57,8 @@ const outOfTheBoxReducer = highOrderReducer(
 
 now you get these attributes handled for you in outOfTheBoxReducer whenever you make getData request:
 
-- GET_DATA + 'LOADING'
-- GET_DATA + 'ERROR'
+- GET_DATA + 'Loading'
+- GET_DATA + 'Error'
 
 ## Configuration once
 
