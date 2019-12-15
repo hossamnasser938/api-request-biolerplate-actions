@@ -1,6 +1,6 @@
 // @flow
-import type { ApiRequestConfigObject } from "../src/package/types";
-import mapRequestEndpointToConfigObject from "../src/package/mapRequestEndpointToConfigObject";
+import type { ApiRequestConfigObject } from "../src/types";
+import mapRequestEndpointToConfigObject from "../src/mapRequestEndpointToConfigObject";
 
 test("test mapRequestEndpointToConfigObject", () => {
   const apiRequestConfig1: ApiRequestConfigObject = {

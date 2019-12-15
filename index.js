@@ -1,2 +1,2 @@
-export * from "./src/package/config";
-export * from "./src/package/highOrderReducer";
+export * from "./src/config";
+export * from "./src/highOrderReducer";

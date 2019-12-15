@@ -6,18 +6,18 @@ import type {
   RequestOnRejectedInterceptor,
   ResponseOnFullfilledInterceptor,
   ResponseOnRejectedInterceptor
-} from "../src/package/types";
+} from "../src/types";
 import {
   highOrderRequestOnFullfilledInterceptor,
   highOrderRequestOnRejectedInterceptor,
   highOrderResponseOnFullfilledInterceptor,
   highOrderResponseOnRejectedInterceptor
-} from "../src/package/highOrderInterceptors";
-import { pushConfigs } from "../src/package/apiRequestsConfigs";
+} from "../src/highOrderInterceptors";
+import { pushConfigs } from "../src/apiRequestsConfigs";
 import getErrorHandler, {
   setErrorHandler,
   resetErrorHandler
-} from "../src/package/getErrorHandler";
+} from "../src/getErrorHandler";
 import JestMock from "jest-mock";
 
 const BASE_URL: string = "https://example.com/";

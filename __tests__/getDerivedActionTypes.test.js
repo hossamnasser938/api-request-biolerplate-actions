@@ -1,4 +1,4 @@
-import getDerivedActionTypes from "../src/package/getDerivedActionTypes";
+import getDerivedActionTypes from "../src/getDerivedActionTypes";
 
 test("test getDerivedActionTypes", () => {
   const apiRequestConfig1: ApiRequestConfigObject = {

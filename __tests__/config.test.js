@@ -1,8 +1,6 @@
-import { config } from "../src/package/config";
+import { config } from "../src/config";
 import axios from "axios";
-import getErrorHandler, {
-  resetErrorHandler
-} from "../src/package/getErrorHandler";
+import getErrorHandler, { resetErrorHandler } from "../src/getErrorHandler";
 
 beforeAll(resetErrorHandler);
 afterAll(resetErrorHandler);
