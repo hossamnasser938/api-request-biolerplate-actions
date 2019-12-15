@@ -1,2 +1,2 @@
-export { config } from ".config";
-export { highOrderReducer } from ".highOrderReducer";
+export { config } from "./config";
+export { highOrderReducer } from "./highOrderReducer";
