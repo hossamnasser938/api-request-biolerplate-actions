@@ -2,3 +2,4 @@ node_modules/
 flow-typed/
 src/
 __tests__/
+example/
