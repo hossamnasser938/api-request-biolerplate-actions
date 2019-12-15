@@ -1,8 +1,8 @@
-import type { ApiRequestConfigObject } from "../package/types";
+import type { ApiRequestConfigObject } from "../src/package/types";
 import configs, {
   pushConfigs,
   clearConfigs
-} from "../package/apiRequestsConfigs";
+} from "../src/package/apiRequestsConfigs";
 
 beforeAll(clearConfigs);
 afterAll(clearConfigs);

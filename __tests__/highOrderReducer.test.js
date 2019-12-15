@@ -1,7 +1,7 @@
 // @flow
-import type { Reducer } from "../package/types";
-import { highOrderReducer } from "../package/highOrderReducer";
-import { pushConfigs, clearConfigs } from "../package/apiRequestsConfigs";
+import type { Reducer } from "../src/package/types";
+import { highOrderReducer } from "../src/package/highOrderReducer";
+import { pushConfigs, clearConfigs } from "../src/package/apiRequestsConfigs";
 
 beforeAll(clearConfigs);
 afterAll(clearConfigs);

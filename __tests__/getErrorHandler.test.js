@@ -1,7 +1,7 @@
 import getErrorHandler, {
   setErrorHandler,
   resetErrorHandler
-} from "../package/getErrorHandler";
+} from "../src/package/getErrorHandler";
 
 beforeAll(resetErrorHandler);
 afterAll(resetErrorHandler);
