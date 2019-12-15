@@ -8,7 +8,7 @@
     "axios interceptors",
     "redux boilerplate actions"
   ],
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "build": "babel src/ -d lib/",
