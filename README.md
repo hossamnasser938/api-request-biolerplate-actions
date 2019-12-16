@@ -108,3 +108,7 @@ Note that only 2 attributes are mandatory: `requestEndpoint` which is the endpoi
 ## Example
 
 you find an example app under example dir in the repository.
+
+## Test
+
+The package is tested using [Jest](https://jestjs.io/) test runner.
