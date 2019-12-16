@@ -1,6 +1,6 @@
 {
   "name": "api-request-biolerplate-actions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "dispatches boilerplate redux actions such as START_LOADING, STOP_LOADING, SET_SUCCESS, and SET_ERROR whenever you make an api request using axios, and handles START_LOADING, STOP_LOADING, and SET_ERROR for you",
   "keywords": [
     "redux",
