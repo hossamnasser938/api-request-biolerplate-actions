@@ -9,9 +9,5 @@ export default (
     config => config.requestEndpoint === requestEndpoint.split("?")[0]
   );
 
-  if (configObject) {
-    return configObject;
-  } else {
-    throw new Error("strange request endpoint: " + requestEndpoint);
-  }
+  return configObject;
 };

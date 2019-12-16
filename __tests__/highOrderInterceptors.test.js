@@ -78,6 +78,18 @@ describe("test requestOnFullfilledInterceptor", () => {
     );
   });
 
+  test("test requestOnFullfilledInterceptor when there is no config for such request endpoint", () => {
+    const axiosRequestConfig = {
+      url: "strange_url"
+      // other irrelevant attributes ...
+    };
+
+    expect(requestOnFullfilledInterceptor(axiosRequestConfig)).toBe(
+      axiosRequestConfig
+    );
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
   test("test requestOnFullfilledInterceptor when actionConfig set to its default", () => {
     const axiosRequestConfig = {
       url: "url1"
@@ -156,6 +168,20 @@ describe("test responseOnFullfilledInterceptor", () => {
     );
   });
 
+  test("test responseOnFullfilledInterceptor when there is no config for such request endpoint", () => {
+    const axiosResponse = {
+      config: {
+        url: "strange_url",
+        baseURL: BASE_URL
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    expect(responseOnFullfilledInterceptor(axiosResponse)).toBe(axiosResponse);
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
   test("test responseOnFullfilledInterceptor when actionConfig set to its default and url attribute returns preceded by BASE_URL", () => {
     const axiosResponse = {
       config: {
@@ -230,6 +256,20 @@ describe("test responseOnRejectedInterceptor", () => {
 
   afterEach(() => {
     resetErrorHandler();
+  });
+
+  test("test responseOnRejectedInterceptor when there is no config for such request endpoint", () => {
+    const axiosError = {
+      config: {
+        url: "strange_url",
+        baseURL: BASE_URL
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    expect(responseOnRejectedInterceptor(axiosError)).rejects.toBe(axiosError);
+    expect(dispatch).not.toHaveBeenCalled();
   });
 
   test("test responseOnRejectedInterceptor when actionConfig set to its default and url attribute returns preceded by BASE_URL", () => {

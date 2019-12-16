@@ -20,6 +20,10 @@ export const highOrderRequestOnFullfilledInterceptor = (
       apiRequestsConfigs
     );
 
+    if (!requestUrlConfigObject) {
+      return config;
+    }
+
     if (!requestUrlConfigObject.noStart) {
       dispatch({
         type: "START_" + requestUrlConfigObject.baseActionType
@@ -51,9 +55,15 @@ export const highOrderResponseOnFullfilledInterceptor = (
 ): ResponseOnFullfilledInterceptor => {
   const responseOnFullfilledInterceptor: ResponseOnFullfilledInterceptor = response => {
     const requestUrlConfigObject = mapRequestEndpointToConfigObject(
-      response.config.url.split(BASE_URL)[1],
+      response.config.url.includes(BASE_URL)
+        ? response.config.url.split(BASE_URL)[1]
+        : response.config.url,
       apiRequestsConfigs
     );
+
+    if (!requestUrlConfigObject) {
+      return response;
+    }
 
     if (!requestUrlConfigObject.noStop) {
       dispatch({
@@ -80,9 +90,15 @@ export const highOrderResponseOnRejectedInterceptor = (
 ): ResponseOnRejectedInterceptor => {
   const responseOnRejectedInterceptor: ResponseOnRejectedInterceptor = error => {
     const requestUrlConfigObject = mapRequestEndpointToConfigObject(
-      error.config.url.split(BASE_URL)[1],
+      error.config.url.includes(BASE_URL)
+        ? error.config.url.split(BASE_URL)[1]
+        : error.config.url,
       apiRequestsConfigs
     );
+
+    if (!requestUrlConfigObject) {
+      return Promise.reject(error);
+    }
 
     if (!requestUrlConfigObject.noStop) {
       dispatch({

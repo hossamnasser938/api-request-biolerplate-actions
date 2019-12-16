@@ -39,7 +39,7 @@ test("test mapRequestEndpointToConfigObject", () => {
     )
   ).toBe(apiRequestConfig3);
 
-  expect(() =>
-    mapRequestEndpointToConfigObject("action3", BaseActionsConfigurations)
-  ).toThrow("strange request endpoint: action3");
+  expect(
+    mapRequestEndpointToConfigObject("strange_url", BaseActionsConfigurations)
+  ).toBeUndefined();
 });
