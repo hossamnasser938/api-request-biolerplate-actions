@@ -11,6 +11,9 @@
 
 - These actions are necessary to keep the user aware of what is going on. However, this makes api requests have boilerplate code that you should duplicate each time. This package uses axios interceptors to dispatch such boilerplate actions for you and also handle them in their relevant reducer letting you care about success case only. It also gives you the ability to decide what actions to dispatch for which requests. So if you have a request that you do not care if it fails, you have a way to force the package to not dispatch SET_ERROR for such request. This applies to all actions not just SET_ERROR.
 
+## Installation
+`npm i api-request-biolerplate-actions`
+
 ## Usage
 
 - For each api request, you define only one ActionType:
