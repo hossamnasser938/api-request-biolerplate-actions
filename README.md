@@ -1,5 +1,7 @@
 # api-request-boilerplate-actions
 
+- If you prefer videos, watch this [video](https://youtu.be/NdoTa-rM9o4) [Arabic speaking].
+
 - For the most of api requests you make in your React/React-Native app, you need to dispatch boilerplate redux actions such as:
 
   - START: before sending the request to show any loading feedback for the user.
