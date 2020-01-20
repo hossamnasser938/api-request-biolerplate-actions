@@ -8,7 +8,7 @@ export type State = any;
 export type Dispatch = (action: Action) => any;
 export type Reducer = (state: State, action: Action) => State;
 
-export type RequestEndPoint = string || RegExp;
+export type RequestEndPoint = string | RegExp;
 
 export type ApiRequestConfigObject = {|
   requestEndpoint: RequestEndPoint,
