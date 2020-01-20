@@ -96,7 +96,7 @@ config(store.dispatch, "https://example.come/api/", errorMessage =>
 
 ```js
   {
-    requestEndpoint: string,
+    requestEndpoint: string | RegExp,
     baseActionType: string,
     errorMessage?: string,
     noStart?: boolean,
