@@ -18,10 +18,16 @@ test("test mapRequestEndpointToConfigObject", () => {
     baseActionType: "ACTION_3"
   };
 
+  const apiRequestConfig4: ApiRequestConfigObject = {
+    requestEndpoint: /^url4\/[\d]+$/,
+    baseActionType: "ACTION_4"
+  };
+
   const BaseActionsConfigurations = [
     apiRequestConfig1,
     apiRequestConfig2,
-    apiRequestConfig3
+    apiRequestConfig3,
+    apiRequestConfig4
   ];
 
   expect(
@@ -40,6 +46,25 @@ test("test mapRequestEndpointToConfigObject", () => {
   ).toBe(apiRequestConfig3);
 
   expect(
+    mapRequestEndpointToConfigObject("url4/4444", BaseActionsConfigurations)
+  ).toBe(apiRequestConfig4);
+
+  expect(
+    mapRequestEndpointToConfigObject(
+      "url4/4444?param=value",
+      BaseActionsConfigurations
+    )
+  ).toBe(apiRequestConfig4);
+
+  expect(
     mapRequestEndpointToConfigObject("strange_url", BaseActionsConfigurations)
+  ).toBeUndefined();
+
+  expect(
+    mapRequestEndpointToConfigObject("url4", BaseActionsConfigurations)
+  ).toBeUndefined();
+
+  expect(
+    mapRequestEndpointToConfigObject("url4/url5/44", BaseActionsConfigurations)
   ).toBeUndefined();
 });

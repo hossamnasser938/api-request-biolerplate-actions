@@ -1,12 +1,12 @@
 //@flow
-import type { ApiRequestConfigObject } from "./types";
+import type { ApiRequestConfigObject, RequestEndPoint } from "./types";
 
 export default (
-  requestEndpoint: string,
+  requestEndpoint: RequestEndPoint,
   apiRequestsConfigs: Array<ApiRequestConfigObject>
 ): ApiRequestConfigObject => {
   const configObject = apiRequestsConfigs.find(
-    config => config.requestEndpoint === requestEndpoint.split("?")[0]
+    config => !!requestEndpoint.split("?")[0].match(config.requestEndpoint)
   );
 
   return configObject;
