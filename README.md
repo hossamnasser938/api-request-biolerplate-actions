@@ -1,5 +1,7 @@
 # api-request-boilerplate-actions
 
+- If you prefer videos, watch this [video](https://youtu.be/NdoTa-rM9o4) [Arabic speaking].
+
 - For the most of api requests you make in your React/React-Native app, you need to dispatch boilerplate redux actions such as:
 
   - START: before sending the request to show any loading feedback for the user.
@@ -8,6 +10,9 @@
   - ERROR: if the request has been failed to handle the error and may be show an error message in the relevent screen.
 
 - These actions are necessary to keep the user aware of what is going on. However, this makes api requests have boilerplate code that you should duplicate each time. This package uses axios interceptors to dispatch such boilerplate actions for you and also handle them in their relevant reducer letting you care about success case only. It also gives you the ability to decide what actions to dispatch for which requests. So if you have a request that you do not care if it fails, you have a way to force the package to not dispatch SET_ERROR for such request. This applies to all actions not just SET_ERROR.
+
+## Installation
+`npm i api-request-biolerplate-actions`
 
 ## Usage
 
@@ -91,7 +96,7 @@ config(store.dispatch, "https://example.come/api/", errorMessage =>
 
 ```js
   {
-    requestEndpoint: string,
+    requestEndpoint: string | RegExp,
     baseActionType: string,
     errorMessage?: string,
     noStart?: boolean,
@@ -106,3 +111,11 @@ Note that only 2 attributes are mandatory: `requestEndpoint` which is the endpoi
 ## Example
 
 you find an example app under example dir in the repository.
+
+## Test
+
+The package is tested using [Jest](https://jestjs.io/) test runner.
+
+## License
+
+MIT
