@@ -5,6 +5,7 @@ import mapRequestEndpointToConfigObject from "../src/mapRequestEndpointToConfigO
 test("test mapRequestEndpointToConfigObject", () => {
   const apiRequestConfig1: ApiRequestConfigObject = {
     requestEndpoint: "url1",
+    requestMethod: "GET",
     baseActionType: "ACTION_1"
   };
 
@@ -31,40 +32,59 @@ test("test mapRequestEndpointToConfigObject", () => {
   ];
 
   expect(
-    mapRequestEndpointToConfigObject("url1", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject(
+      { url: "url1", method: "GET" },
+      BaseActionsConfigurations
+    )
   ).toBe(apiRequestConfig1);
 
   expect(
-    mapRequestEndpointToConfigObject("url2", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject(
+      { url: "url1", method: "POST" },
+      BaseActionsConfigurations
+    )
+  ).toBeUndefined();
+
+  expect(
+    mapRequestEndpointToConfigObject({ url: "url2" }, BaseActionsConfigurations)
   ).toBe(apiRequestConfig2);
 
   expect(
     mapRequestEndpointToConfigObject(
-      "url3?param=value",
+      { url: "url3?param=value" },
       BaseActionsConfigurations
     )
   ).toBe(apiRequestConfig3);
 
   expect(
-    mapRequestEndpointToConfigObject("url4/4444", BaseActionsConfigurations)
-  ).toBe(apiRequestConfig4);
-
-  expect(
     mapRequestEndpointToConfigObject(
-      "url4/4444?param=value",
+      { url: "url4/4444" },
       BaseActionsConfigurations
     )
   ).toBe(apiRequestConfig4);
 
   expect(
-    mapRequestEndpointToConfigObject("strange_url", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject(
+      { url: "url4/4444?param=value" },
+      BaseActionsConfigurations
+    )
+  ).toBe(apiRequestConfig4);
+
+  expect(
+    mapRequestEndpointToConfigObject(
+      { url: "strange_url" },
+      BaseActionsConfigurations
+    )
   ).toBeUndefined();
 
   expect(
-    mapRequestEndpointToConfigObject("url4", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject({ url: "url4" }, BaseActionsConfigurations)
   ).toBeUndefined();
 
   expect(
-    mapRequestEndpointToConfigObject("url4/url5/44", BaseActionsConfigurations)
+    mapRequestEndpointToConfigObject(
+      { url: "url4/url5/44" },
+      BaseActionsConfigurations
+    )
   ).toBeUndefined();
 });

@@ -9,11 +9,15 @@ import {
   highOrderResponseOnRejectedInterceptor
 } from "./highOrderInterceptors";
 
+export let BASE_URL;
+
 export const config = (
   dispatch: Dispatch,
-  BASE_URL: string,
+  baseUrl: string,
   errorHandler?: ErrorHandler
 ): void => {
+  BASE_URL = baseUrl;
+
   if (errorHandler) {
     setErrorHandler(errorHandler);
   }

@@ -24,6 +24,7 @@ const BASE_URL: string = "https://example.com/";
 
 const apiRequestConfig1: ApiRequestConfigObject = {
   requestEndpoint: "url1",
+  requestMethod: "GET",
   baseActionType: "ACTION_1"
 };
 
@@ -90,15 +91,30 @@ describe("test requestOnFullfilledInterceptor", () => {
     expect(dispatch).not.toHaveBeenCalled();
   });
 
-  test("test requestOnFullfilledInterceptor when actionConfig set to its default", () => {
+  test("test requestOnFullfilledInterceptor when there is a config for such request endpoint with the same method", () => {
     const axiosRequestConfig = {
-      url: "url1"
+      url: "url1",
+      method: "GET"
       // other irrelevant attributes ...
     };
 
-    requestOnFullfilledInterceptor(axiosRequestConfig);
-
+    expect(requestOnFullfilledInterceptor(axiosRequestConfig)).toBe(
+      axiosRequestConfig
+    );
     expect(dispatch).toHaveBeenCalledWith({ type: "START_ACTION_1" });
+  });
+
+  test("test requestOnFullfilledInterceptor when there is a config for such request endpoint with different method", () => {
+    const axiosRequestConfig = {
+      url: "url1",
+      method: "POST"
+      // other irrelevant attributes ...
+    };
+
+    expect(requestOnFullfilledInterceptor(axiosRequestConfig)).toBe(
+      axiosRequestConfig
+    );
+    expect(dispatch).not.toHaveBeenCalled();
   });
 
   test("test requestOnFullfilledInterceptor when url has parameters", () => {
@@ -182,10 +198,46 @@ describe("test responseOnFullfilledInterceptor", () => {
     expect(dispatch).not.toHaveBeenCalled();
   });
 
+  test("test responseOnFullfilledInterceptor when there is s config for such request endpoint with the same method", () => {
+    const axiosResponse = {
+      config: {
+        url: BASE_URL + "url1",
+        baseURL: BASE_URL,
+        method: "GET"
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    responseOnFullfilledInterceptor(axiosResponse);
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_1" });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: "SUCCESS_ACTION_1",
+      payload: axiosResponse
+    });
+  });
+
+  test("test responseOnFullfilledInterceptor when there is s config for such request endpoint with different method", () => {
+    const axiosResponse = {
+      config: {
+        url: BASE_URL + "url1",
+        baseURL: BASE_URL,
+        method: "POST"
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    expect(responseOnFullfilledInterceptor(axiosResponse)).toBe(axiosResponse);
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
   test("test responseOnFullfilledInterceptor when actionConfig set to its default and url attribute returns preceded by BASE_URL", () => {
     const axiosResponse = {
       config: {
         url: BASE_URL + "url1",
+        method: "GET",
         baseURL: BASE_URL
         // other irrelevant attributes ...
       }
@@ -272,10 +324,47 @@ describe("test responseOnRejectedInterceptor", () => {
     expect(dispatch).not.toHaveBeenCalled();
   });
 
+  test("test responseOnRejectedInterceptor when there is a config for such request endpoint with the same method", () => {
+    const axiosError = {
+      config: {
+        url: "url1",
+        baseURL: BASE_URL,
+        method: "GET"
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    expect(responseOnRejectedInterceptor(axiosError)).toBeUndefined();
+
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).toHaveBeenCalledWith({ type: "STOP_ACTION_1" });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: "ERROR_ACTION_1",
+      payload: axiosError
+    });
+  });
+
+  test("test responseOnRejectedInterceptor when there is a config for such request endpoint with different method", () => {
+    const axiosError = {
+      config: {
+        url: "url1",
+        baseURL: BASE_URL,
+        method: "POST"
+        // other irrelevant attributes ...
+      }
+      // other irrelevant attributes ...
+    };
+
+    expect(responseOnRejectedInterceptor(axiosError)).rejects.toBe(axiosError);
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
   test("test responseOnRejectedInterceptor when actionConfig set to its default and url attribute returns preceded by BASE_URL", () => {
     const axiosError = {
       config: {
         url: BASE_URL + "url1",
+        method: "GET",
         baseURL: BASE_URL
         // other irrelevant attributes ...
       }

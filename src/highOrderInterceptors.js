@@ -16,7 +16,7 @@ export const highOrderRequestOnFullfilledInterceptor = (
 ): RequestOnFullfilledInterceptor => {
   const requestOnFullfilledInterceptor: RequestOnFullfilledInterceptor = config => {
     const requestUrlConfigObject = mapRequestEndpointToConfigObject(
-      config.url,
+      config,
       apiRequestsConfigs
     );
 
@@ -55,9 +55,7 @@ export const highOrderResponseOnFullfilledInterceptor = (
 ): ResponseOnFullfilledInterceptor => {
   const responseOnFullfilledInterceptor: ResponseOnFullfilledInterceptor = response => {
     const requestUrlConfigObject = mapRequestEndpointToConfigObject(
-      response.config.url.includes(BASE_URL)
-        ? response.config.url.split(BASE_URL)[1]
-        : response.config.url,
+      response.config,
       apiRequestsConfigs
     );
 
@@ -90,9 +88,7 @@ export const highOrderResponseOnRejectedInterceptor = (
 ): ResponseOnRejectedInterceptor => {
   const responseOnRejectedInterceptor: ResponseOnRejectedInterceptor = error => {
     const requestUrlConfigObject = mapRequestEndpointToConfigObject(
-      error.config.url.includes(BASE_URL)
-        ? error.config.url.split(BASE_URL)[1]
-        : error.config.url,
+      error.config,
       apiRequestsConfigs
     );
 

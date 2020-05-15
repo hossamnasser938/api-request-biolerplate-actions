@@ -1,4 +1,9 @@
-import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import type {
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosError,
+  Method
+} from "axios";
 
 export type ErrorHandler = string => void;
 
@@ -12,6 +17,7 @@ export type RequestEndPoint = string | RegExp;
 
 export type ApiRequestConfigObject = {|
   requestEndpoint: RequestEndPoint,
+  requestMethod: Method,
   baseActionType: string,
   errorMessage?: string,
   noStart?: boolean,
