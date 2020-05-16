@@ -1,4 +1,4 @@
-# api-request-boilerplate-actions
+# api-request-biolerplate-actions
 
 - If you prefer videos, watch this [video](https://youtu.be/NdoTa-rM9o4) [Arabic speaking].
 
