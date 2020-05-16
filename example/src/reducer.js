@@ -21,7 +21,7 @@ export default highOrderReducer(
   initialState,
   [
     {
-      requestEndpoint: 'users/hossamnasser938/repos',
+      requestEndPoint: 'users/hossamnasser938/repos',
       baseActionType: GET_REPOS,
       errorMessage: 'failed to get repos',
     },

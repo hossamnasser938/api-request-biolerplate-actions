@@ -1,5 +1,5 @@
 //@flow
-import type { ApiRequestConfigObject, requestEndpoint } from "./types";
+import type { ApiRequestConfigObject, requestEndPoint } from "./types";
 import { AxiosRequestConfig } from "axios";
 import { removeSlashIfExists } from "./helperFunctions";
 
@@ -8,11 +8,11 @@ export default (
   apiRequestsConfigs: Array<ApiRequestConfigObject>,
   BASE_URL
 ): ApiRequestConfigObject => {
-  const requestEndpoint = axiosRequestConfig.url.includes(BASE_URL)
+  const requestEndPoint = axiosRequestConfig.url.includes(BASE_URL)
     ? axiosRequestConfig.url.split(BASE_URL)[1]
     : axiosRequestConfig.url;
 
-  const noParameterRequestEndPoint = requestEndpoint.split("?")[0];
+  const noParameterRequestEndPoint = requestEndPoint.split("?")[0];
 
   const noSlashRequestEndpoint = removeSlashIfExists(
     noParameterRequestEndPoint
@@ -21,12 +21,12 @@ export default (
   const configObject = apiRequestsConfigs.find(config => {
     let doesMatch;
 
-    if (typeof config.requestEndpoint === "string") {
-      const noSlashConfigEndpoint = removeSlashIfExists(config.requestEndpoint);
+    if (typeof config.requestEndPoint === "string") {
+      const noSlashConfigEndpoint = removeSlashIfExists(config.requestEndPoint);
 
       doesMatch = noSlashConfigEndpoint === noSlashRequestEndpoint;
-    } else if (config.requestEndpoint instanceof RegExp) {
-      doesMatch = config.requestEndpoint.test(noSlashRequestEndpoint);
+    } else if (config.requestEndPoint instanceof RegExp) {
+      doesMatch = config.requestEndPoint.test(noSlashRequestEndpoint);
     }
 
     return (

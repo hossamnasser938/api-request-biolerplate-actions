@@ -6,23 +6,23 @@ const BASE_URL = "http://www.example.com/";
 
 test("test mapRequestEndpointToConfigObject", () => {
   const apiRequestConfig1: ApiRequestConfigObject = {
-    requestEndpoint: "url1",
+    requestEndPoint: "url1",
     requestMethod: "GET",
     baseActionType: "ACTION_1"
   };
 
   const apiRequestConfig2: ApiRequestConfigObject = {
-    requestEndpoint: "url2",
+    requestEndPoint: "url2",
     baseActionType: "ACTION_2"
   };
 
   const apiRequestConfig3: ApiRequestConfigObject = {
-    requestEndpoint: "url3",
+    requestEndPoint: "url3",
     baseActionType: "ACTION_3"
   };
 
   const apiRequestConfig4: ApiRequestConfigObject = {
-    requestEndpoint: /^url4\/[\d]+$/,
+    requestEndPoint: /^url4\/[\d]+$/,
     baseActionType: "ACTION_4"
   };
 

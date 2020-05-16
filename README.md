@@ -53,7 +53,7 @@ const outOfTheBoxReducer = highOrderReducer(
   {data: []}
   myReducer,
   [{
-    requestEndpoint: 'some-end-point',
+    requestEndPoint: 'some-end-point',
     baseActionType: GET_DATA
   }]
 );
@@ -97,7 +97,7 @@ config(store.dispatch, "https://example.come/api/", errorMessage =>
 
 ```js
   {
-    requestEndpoint: string | RegExp,
+    requestEndPoint: string | RegExp,
     requestMethod: AxiosRequestMethod,
     baseActionType: string,
     errorMessage?: string,
@@ -108,7 +108,7 @@ config(store.dispatch, "https://example.come/api/", errorMessage =>
   }
 ```
 
-Note that only 2 attributes are mandatory: `requestEndpoint` which is the endpoint this action targets and `baseActionType` which is the action type this endpoint should be mapped to. The rest of attributes are optional. The attributes `noStart`, `noStop`, and `noError` can be set to true whenever you do not want the package to dispatch an action neither handle that action in the reducer for a given request. `noSuccess` can be set to true whenever you do not want the package to dispatch success action for a given request.
+Note that only 2 attributes are mandatory: `requestEndPoint` which is the endpoint this action targets and `baseActionType` which is the action type this endpoint should be mapped to. The rest of attributes are optional. The attributes `noStart`, `noStop`, and `noError` can be set to true whenever you do not want the package to dispatch an action neither handle that action in the reducer for a given request. `noSuccess` can be set to true whenever you do not want the package to dispatch success action for a given request.
 
 ## Example
 

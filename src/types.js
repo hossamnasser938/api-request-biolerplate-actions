@@ -16,7 +16,7 @@ export type Reducer = (state: State, action: Action) => State;
 export type RequestEndPoint = string | RegExp;
 
 export type ApiRequestConfigObject = {|
-  requestEndpoint: RequestEndPoint,
+  requestEndPoint: RequestEndPoint,
   requestMethod: Method,
   baseActionType: string,
   errorMessage?: string,

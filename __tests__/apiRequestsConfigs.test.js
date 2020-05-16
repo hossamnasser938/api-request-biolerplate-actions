@@ -8,17 +8,17 @@ test("test pushing to apiRequestsConfigs", () => {
   expect(configs).toEqual([]);
 
   const apiRequestConfig1: ApiRequestConfigObject = {
-    requestEndpoint: "url1",
+    requestEndPoint: "url1",
     baseActionType: "ACTION_1"
   };
 
   const apiRequestConfig2: ApiRequestConfigObject = {
-    requestEndpoint: "url2",
+    requestEndPoint: "url2",
     baseActionType: "ACTION_2"
   };
 
   const apiRequestConfig3: ApiRequestConfigObject = {
-    requestEndpoint: "url3",
+    requestEndPoint: "url3",
     baseActionType: "ACTION_3"
   };
 

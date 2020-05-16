@@ -2,24 +2,24 @@ import getDerivedActionTypes from "../src/getDerivedActionTypes";
 
 test("test getDerivedActionTypes", () => {
   const apiRequestConfig1: ApiRequestConfigObject = {
-    requestEndpoint: "url1",
+    requestEndPoint: "url1",
     baseActionType: "ACTION_1"
   };
 
   const apiRequestConfig2: ApiRequestConfigObject = {
-    requestEndpoint: "url2",
+    requestEndPoint: "url2",
     baseActionType: "ACTION_2",
     noStart: true
   };
 
   const apiRequestConfig3: ApiRequestConfigObject = {
-    requestEndpoint: "url3",
+    requestEndPoint: "url3",
     baseActionType: "ACTION_3",
     noStop: true
   };
 
   const apiRequestConfig4: ApiRequestConfigObject = {
-    requestEndpoint: "url4",
+    requestEndPoint: "url4",
     baseActionType: "ACTION_4",
     noError: true
   };
