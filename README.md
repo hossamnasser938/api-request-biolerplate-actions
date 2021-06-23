@@ -1,5 +1,4 @@
-# api-request-biolerplate-actions
-[Deprecated] please, do not use this package. It's not maintained now.
+# [Deprecated] api-request-biolerplate-actions(please, do not use this package. It's not maintained now)
 
 - If you prefer videos, watch this [video](https://youtu.be/NdoTa-rM9o4) [Arabic speaking].
 
