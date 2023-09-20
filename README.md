@@ -1,19 +1,28 @@
-# [Deprecated] api-request-biolerplate-actions(please, do not use this package. It's not maintained now)
+# [Deprecated] [api-request-biolerplate-actions](https://www.npmjs.com/package/api-request-biolerplate-actions/access) (Please, do not use this package. It's not maintained anymore. Now You can use [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) instead)
 
 - If you prefer videos, watch this [video](https://youtu.be/NdoTa-rM9o4) [Arabic speaking].
 
+## Problem statemenxt
 - For the most of api requests you make in your React/React-Native app, you need to dispatch boilerplate redux actions such as:
 
-  - START: before sending the request to show any loading feedback for the user.
-  - STOP: after the request has been succeeded or failed to hide loading feedback.
-  - SUCCESS: if the request has beensucceeded to handle the response and update app state.
-  - ERROR: if the request has been failed to handle the error and may be show an error message in the relevent screen.
+  - **START_LOADING**: before sending the request to show any loading feedback for the user.
+  - **STOP_LOADING**: after the request has been succeeded or failed to hide loading feedback.
+  - **SUCCESS**: if the request has been succeeded to handle the response and update app state.
+  - **ERROR**: if the request has been failed to handle the error and may be show an error message in the relevent screen.
 
-- These actions are necessary to keep the user aware of what is going on. However, this makes api requests have boilerplate code that you should duplicate each time. This package uses axios interceptors to dispatch such boilerplate actions for you and also handle them in their relevant reducer letting you care about success case only. It also gives you the ability to decide what actions to dispatch for which requests. So if you have a request that you do not care if it fails, you have a way to force the package to not dispatch SET_ERROR for such request. This applies to all actions not just SET_ERROR.
+```mermaid
+flowchart LR
+    START_LOADING --> id1{{AXIOS API Request}} --> SUCESS & ERROR --> STOP_LOADING
+    style id1 fill:#000,color:#fff,stroke:#fff,stroke-width:2px
+```
+
+- These actions are necessary to keep the user aware of what is going on. However, this makes api requests have boilerplate code that you should duplicate each time. This package uses **axios interceptors** to dispatch such boilerplate actions for you and also handle them in their relevant reducer letting you care about success case only. It also gives you the ability to decide what actions to dispatch for which requests. So for example, you might have a request that you do not care if it fails, then you have a way to force the package to not dispatch **SET_ERROR** for such request.
 
 ## Installation
 
-`npm i api-request-biolerplate-actions`
+```
+npm i api-request-biolerplate-actions
+```
 
 ## Usage
 
@@ -66,6 +75,14 @@ now you get these attributes handled for you in outOfTheBoxReducer whenever you 
 - GET_DATA + 'Loading'
 - GET_DATA + 'Error'
 
+You can define selectors to access those properties:
+```js
+// import GET_DATA
+
+export const getDataLoading = (state) => state.[your-reducer-name].[GET_DATA + 'Loading']
+export const getDataError = (state) => state.[your-reducer-name].[GET_DATA + 'Error']
+```
+
 ## Configuration once
 
 - The package should be configured through `config` method.
@@ -98,7 +115,7 @@ config(store.dispatch, "https://example.come/api/", errorMessage =>
 ```js
   {
     requestEndPoint: string | RegExp,
-    requestMethod: AxiosRequestMethod,
+    requestMethod?: AxiosRequestMethod,
     baseActionType: string,
     errorMessage?: string,
     noStart?: boolean,
@@ -121,3 +138,39 @@ The package is tested using [Jest](https://jestjs.io/) test runner.
 ## License
 
 MIT
+
+## Package internal design & Technical implementation
+### Package Main Players
+ 
+#### Package Config Manager
+responsible for:
+  - exposing `config` method that accepts global package configuration from the user
+  - binding the `Axios Interceptors` to the axios instance
+
+#### API Request To Config Object Mapper 
+responsible for
+  - mapping an Axios request object to one of the API requests configs from the user if any
+ 
+#### Derived Action Types Manager
+responsible for:
+  - deriving actions to be handled by the `High Order Reducer` based on API request config
+
+#### Axios Interceptors
+responsible for:
+  - Dispatching appropriate actions for an API request
+ 
+#### High Order Reducer
+responsible for:
+  - Handling actions dispatched by the `Axios Interceptors`
+
+### The package resonsibility can be divided into 2 categories
+#### Dispatching redux actions using Axios `Interceptors`
+<img width="877" alt="AxiosInterceptorsIllustration" src="https://github.com/hossamnasser938/api-request-biolerplate-actions/assets/27894818/cb59b165-4178-4bc3-8890-3af678d96c7c">
+
+The `Axios Interceptors` receive the request config from axios, let `API Request To Config Object Mapper` maps it into a config object, then based on the config object it dispatches required redux actions using the dispatch instance got from the `Package Config Manager`.
+
+#### Handling redux actions within the `High Order Reducer`
+<img width="924" alt="HighOrderReducerIllustration" src="https://github.com/hossamnasser938/api-request-biolerplate-actions/assets/27894818/cdbda13e-a81f-435e-a307-4c496544f528">
+
+The `High Order Reducer` gets the config objects from the user as a parameter, passes it to the `Derived Action Types Manager` to get the actions that should be handled by the reducer and then handles it.
+
